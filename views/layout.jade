@@ -4,8 +4,17 @@ html(lang="es")
     title Turismo
     meta(charset="utf-8")
     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
   body
+    block nav
+      nav(class="navbar navbar-default")
+        div(class="container-fluid")
+          div(class="navbar-header")
+            button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
+              span(class="sr-only")
+              
     block titulo
     block contenido
     block dashboard
     block footer
+    link(href="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", rel="script")

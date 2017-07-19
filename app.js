@@ -1,31 +1,44 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var app = express();
-var server = require("http").createServer(app);
-var io = require("socket.io").listen(server);
+var express = require('express'),
+    app = express(),
+    server = require('http').createServer(app),
+    io = require("socket.io").listen(server),
+    nicknames = {};
 
+server.listen(8080);
 
-app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.set("view engine", "jade");
+app.use(express.static(__dirname + '/public'));
 
-io.sockets.on("connection", function(socket){
-  socket.on("sendMessage", function(data){
-    io.socket.emit("newMessage", {msg: data});
-  });
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/",function(req,res){
-  res.render("index");
-});
+app.get('/chat', function(req, res) {
+    res.sendFile(__dirname + '/views/chat.html');
 
-app.get("/chat",function(req,res){
-  res.render("chat");
 });
+io.sockets.on('connection', function(socket) {
+    socket.on('send message', function(data) {
+        io.sockets.emit('new message', {msg: data, nick: socket.nickname});
+    });
 
-app.get("/dashboard",function(req,res){
-  res.render("dashboard");
+    socket.on('new user', function(data, callback) {
+        if (data in nicknames) {
+            callback(false);
+        } else {
+            callback(true);
+            socket.nickname = data;
+            nicknames[socket.nickname] = 1;
+            updateNickNames();
+        }
+    });
+
+    socket.on('disconnect', function(data) {
+        if(!socket.nickname) return;
+        delete nicknames[socket.nickname];
+        updateNickNames();
+    });
+
+    function updateNickNames() {
+        io.sockets.emit('usernames', nicknames);
+    }
 });
-
-app.listen(8080);

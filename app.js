@@ -2,7 +2,24 @@ var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
     io = require("socket.io").listen(server),
-    nicknames = {};
+    nicknames = {},
+    mqtt = require('mqtt'),
+    client  = mqtt.connect('mqtt://localhost:1883');
+
+var temp = 56.5,
+    hum = 58.6,
+    vel = 35;
+
+client.on('connect', function () {
+  client.subscribe('temperatura')
+  //client.publish('temperatura', String(temp))
+});
+
+client.on('message', function (topic, message) {
+  // message is Buffer
+  console.log(message.toString())
+  client.end()
+});
 
 server.listen(8080);
 

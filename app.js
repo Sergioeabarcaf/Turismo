@@ -4,21 +4,28 @@ var express = require('express'),
     io = require("socket.io").listen(server),
     nicknames = {},
     mqtt = require('mqtt'),
-    client  = mqtt.connect('mqtt://localhost:1883');
-
-var temp = 56.5,
-    hum = 58.6,
-    vel = 35;
+    client = mqtt.connect('mqtt://localhost:1883');
 
 client.on('connect', function () {
   client.subscribe('temperatura')
+  client.subscribe('humedad')
+  client.subscribe('velocidad')
   //client.publish('temperatura', String(temp))
 });
 
 client.on('message', function (topic, message) {
+  if(topic == "humedad"){
+    console.log("es humedad");
+  }
+  if(topic == "temperatura"){
+    console.log("es temperatura");
+  }
+  if(topic == "velocidad"){
+    console.log("es viento");
+  }
   // message is Buffer
   console.log(message.toString())
-  client.end()
+  //client.end()
 });
 
 server.listen(8080);

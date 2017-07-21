@@ -61,7 +61,10 @@ app.get('/chat', function(req, res) {
 	res.sendFile(__dirname + '/views/chat.html');
 });
 app.get('/dashboard',function(req,res){
-  res.sendFile(__dirname + '/views/dashboard.html')
+  Sensor.find({paramSensor: "temperatura"},function(err,sensor){
+		console.log(sensor);
+		res.sendFile(__dirname + '/views/dashboard.html');
+	});
 });
 
 //Sistema de Chat

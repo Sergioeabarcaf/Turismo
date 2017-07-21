@@ -4,16 +4,27 @@ var express = require('express'),
     io = require("socket.io").listen(server),
     nicknames = {},
     mqtt = require('mqtt'),
-    client = mqtt.connect('mqtt://localhost:1883');
+    client = mqtt.connect('mqtt://localhost:1883')
+    mongoose = require("mongoose")
+    mongoose.connect('mongodb://localhost/estacion');
+
+var temp = 65.5;
+var id = "sergio ";
+var messageTemp = id + String(temp);
+var idmess = " ";
+var x = " ";
 
 client.on('connect', function () {
   client.subscribe('temperatura')
   client.subscribe('humedad')
   client.subscribe('velocidad')
-  //client.publish('temperatura', String(temp))
+  client.publish('temperatura', messageTemp)
 });
 
+
 client.on('message', function (topic, message) {
+  x = message.toString();
+  idmess = x.split(" ");
   if(topic == "humedad"){
     console.log("es humedad");
   }
@@ -25,6 +36,8 @@ client.on('message', function (topic, message) {
   }
   // message is Buffer
   console.log(message.toString())
+  console.log(idmess[0]);
+  console.log(idmess[1]);
   //client.end()
 });
 

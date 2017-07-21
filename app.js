@@ -8,10 +8,10 @@ var express = require('express'),
 	Sensor = require("./models/sensor").Sensor;
 
 //datos de prueba de sensores
-var temp = 65.5;
-var id = "sergio ";
-var messageTemp = id + String(temp);
-var splitMessage = " ";
+//var temp = 65.5;
+//var id = "sergio ";
+//var messageTemp = id + String(temp);
+//var splitMessage = " ";
 //var x = " ";
 
 //subscribe a los topicos de los sensores
@@ -27,7 +27,7 @@ client.on('connect', function() {
 	client.subscribe('UV');
 	client.subscribe('lummens');
 	//Publica de prueba
-	client.publish('temperatura', messageTemp);
+	//client.publish('temperatura', messageTemp);
 });
 
 //Carga de los datos obtenidos a mongoDB
@@ -61,7 +61,7 @@ app.get('/chat', function(req, res) {
 	res.sendFile(__dirname + '/views/chat.html');
 });
 app.get('/dashboard',function(req,res){
-  Sensor.find({paramSensor: "temperatura"},function(err,sensor){
+  Sensor.find({paramSensor: "puntoRocio"},function(err,sensor){
 		console.log(sensor);
 		res.sendFile(__dirname + '/views/dashboard.html');
 	});

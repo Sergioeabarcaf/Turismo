@@ -33,11 +33,11 @@ client.on('connect', function() {
 //Carga de los datos obtenidos a mongoDB
 client.on('message', function(topic, message) {
 	//x = message.toString();
-	splitMessage = message.toString().split(" ");
+	splitMessage = message.toString().split("/");
 	var sensor = new Sensor({
 		paramSensor: String(topic),
-		dato: String(splitMessage[0]),
-		idTotem: String(splitMessage[1]),
+		dato: String(splitMessage[1]),
+		idTotem: String(splitMessage[0]),
 		fechaYHora: Date()
 	});
 	sensor.save(function(err) {

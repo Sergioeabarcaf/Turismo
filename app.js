@@ -60,6 +60,9 @@ app.get('/', function(req, res) {
 app.get('/chat', function(req, res) {
 	res.sendFile(__dirname + '/views/chat.html');
 });
+app.get('/dashboard',function(req,res){
+  res.sendFile(__dirname + '/views/dashboard.html')
+});
 
 //Sistema de Chat
 io.sockets.on('connection', function(socket) {

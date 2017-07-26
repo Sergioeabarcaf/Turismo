@@ -5,14 +5,14 @@ var express = require('express'),
 	nicknames = {},
 	mqtt = require('mqtt'),
 	client = mqtt.connect('mqtt://localhost:1883'),
-	Sensor = require("./models/sensor").Sensor;
+	Sensor = require("./models/sensor").Sensor,
+	document = require("min-document");
 
 //datos de prueba de sensores
-//var temp = 65.5;
-//var id = "sergio ";
-//var messageTemp = id + String(temp);
-//var splitMessage = " ";
-//var x = " ";
+var temp = 65.5;
+var id = "sergio ";
+var messageTemp = id + String(temp);
+var splitMessage = " ";
 
 //subscribe a los topicos de los sensores
 client.on('connect', function() {
@@ -27,12 +27,11 @@ client.on('connect', function() {
 	client.subscribe('UV');
 	client.subscribe('lummens');
 	//Publica de prueba
-	//client.publish('temperatura', messageTemp);
+	client.publish('temperatura', messageTemp);
 });
 
 //Carga de los datos obtenidos a mongoDB
 client.on('message', function(topic, message) {
-	//x = message.toString();
 	splitMessage = message.toString().split("/");
 	var sensor = new Sensor({
 		paramSensor: String(topic),
@@ -62,9 +61,15 @@ app.get('/chat', function(req, res) {
 });
 app.get('/dashboard',function(req,res){
   Sensor.find({paramSensor: "puntoRocio"},function(err,sensor){
-		console.log(sensor);
-		res.sendFile(__dirname + '/views/dashboard.html');
+		console.log(sensor[sensor.length-1]);
 	});
+	Sensor.find({paramSensor: "temperatura"},function(err,sensor){
+		console.log(sensor[sensor.length-1]);
+	});
+	Sensor.find({paramSensor: "humedad"},function(err,sensor){
+		console.log(sensor[sensor.length-1]);
+	});
+	res.sendFile(__dirname + '/views/dashboard.html');
 });
 
 //Sistema de Chat

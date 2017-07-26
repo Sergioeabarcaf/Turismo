@@ -5,8 +5,8 @@ var express = require('express'),
 	nicknames = {},
 	mqtt = require('mqtt'),
 	client = mqtt.connect('mqtt://localhost:1883'),
-	Sensor = require("./models/sensor").Sensor;
-
+	Sensor = require("./models/sensor").Sensor,
+	RadialGauge = require("canvas-gauges");
 //datos de prueba de sensores
 //var temp = 65.5;
 //var id = "sergio ";
@@ -61,7 +61,8 @@ app.get('/chat', function(req, res) {
 	res.sendFile(__dirname + '/views/chat.html');
 });
 app.get('/dashboard',function(req,res){
-  Sensor.find({paramSensor: "puntoRocio"},function(err,sensor){
+	//dashboard
+	Sensor.find({paramSensor: "puntoRocio"},function(err,sensor){
 		console.log(sensor);
 		res.sendFile(__dirname + '/views/dashboard.html');
 	});

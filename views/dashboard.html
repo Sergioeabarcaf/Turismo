@@ -5,6 +5,7 @@
 		Turismo
 	</title>
 	<script src="js/jquery.js"></script>
+  <script src="js/dashboard.js"></script>
 	<link rel="stylesheet" href="css/main.css" type="text/css">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
@@ -13,11 +14,11 @@
 </head>
 <body>
   <a href="/" class="btn btn-info btn-block" role="button">Home</a>
-  <div class="container">
-    <div class="dashboard">
+  <div class="container center">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" id="temperatura">
       <canvas data-type="linear-gauge"
-        data-width="160"
-        data-height="600"
+        data-width="100"
+        data-height="300"
         data-border-radius="20"
         data-borders="0"
         data-bar-stroke-width="20"
@@ -26,8 +27,35 @@
         data-value="22.3"
         data-units="°C"
         data-color-value-box-shadow="false"
-></canvas>
+        ></canvas>
     </div>
 
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" id="humedad">
+      <canvas data-type="linear-gauge"
+        data-width="100"
+        data-height="300"
+        data-border-radius="10"
+        data-borders="0"
+        data-bar-begin-circle="25"
+        data-minor-ticks="10"
+        data-value="36.6"
+        data-min-value="0"
+        data-max-value="100"
+        data-title="% Hum"
+        data-major-ticks="10,20,30,40,50,60,70,80,90,100"
+        data-ticks-width="18"
+        data-ticks-width-minor="7.5"
+        data-bar-width="5"
+        data-highlights="false"
+        data-color-value-box-shadow="false"
+        data-value-box-stroke="0"
+        data-color-value-box-background="false"
+        data-value-int="2"
+        data-value-dec="1"
+        ></canvas>
+    </div>
+
+    <canvas id="gauge-id" width="300" height="300"></canvas>
   </div>
+
 </body>

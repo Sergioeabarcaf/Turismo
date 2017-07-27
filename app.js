@@ -18,9 +18,8 @@ var express = require('express'),
 client.on('connect', function() {
 	client.subscribe('temperatura');
 	client.subscribe('humedad');
-	client.subscribe('velocidad');
-	client.subscribe('presion');
 	client.subscribe('puntoRocio');
+	client.subscribe('presion');
 	client.subscribe('velViento');
 	client.subscribe('dirViento');
 	client.subscribe('mmAgua');
@@ -62,63 +61,56 @@ client.on('message', function(topic, message) {
 		io.sockets.emit('new humedad', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new temperatura");
-	}
-
-	if(topic=="velocidad"){
-		io.sockets.emit('new velocidad', {
-			value: String(splitMessage[1])
-		});
-		console.log("Emitio el mensaje a new temperatura");
+		console.log("Emitio el mensaje a new humedad");
 	}
 
 	if(topic=="presion"){
 		io.sockets.emit('new presion', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new temperatura");
+		console.log("Emitio el mensaje a new presion");
 	}
 
 	if(topic=="puntoRocio"){
 		io.sockets.emit('new puntoRocio', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new temperatura");
+		console.log("Emitio el mensaje a new puntoRocio");
 	}
 
 	if(topic=="velViento"){
 		io.sockets.emit('new velViento', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new temperatura");
+		console.log("Emitio el mensaje a new velViento");
 	}
 
 	if(topic=="dirViento"){
 		io.sockets.emit('new dirViento', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new temperatura");
+		console.log("Emitio el mensaje a new dirViento");
 	}
 
 	if(topic=="mmAgua"){
 		io.sockets.emit('new mmAgua', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new temperatura");
+		console.log("Emitio el mensaje a new mmAgua");
 	}
 
 	if(topic=="UV"){
 		io.sockets.emit('new UV', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new temperatura");
+		console.log("Emitio el mensaje a new UV");
 	}
 
 	if(topic=="lummens"){
 		io.sockets.emit('new lummens', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new temperatura");
+		console.log("Emitio el mensaje a new lummens");
 	}
 
 
@@ -167,13 +159,6 @@ io.sockets.on('connection', function(socket) {
 	socket.on('send humedad', function(data) {
 		console.log(data);
 		io.sockets.emit('new humedad', {
-			value: data
-		});
-	});
-
-	socket.on('send velocidad', function(data) {
-		console.log(data);
-		io.sockets.emit('new velocidad', {
 			value: data
 		});
 	});

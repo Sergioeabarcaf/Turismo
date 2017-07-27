@@ -50,12 +50,78 @@ client.on('message', function(topic, message) {
 		}
 	})
 
+	//Condicional para ejecutar la funcion correspondiente a cada dashboard
 	if(topic=="temperatura"){
 		io.sockets.emit('new temperatura', {
 			value: String(splitMessage[1])
 		});
 		console.log("Emitio el mensaje a new temperatura");
 	}
+
+	if(topic=="humedad"){
+		io.sockets.emit('new humedad', {
+			value: String(splitMessage[1])
+		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+
+	if(topic=="velocidad"){
+		io.sockets.emit('new velocidad', {
+			value: String(splitMessage[1])
+		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+
+	if(topic=="presion"){
+		io.sockets.emit('new presion', {
+			value: String(splitMessage[1])
+		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+
+	if(topic=="puntoRocio"){
+		io.sockets.emit('new puntoRocio', {
+			value: String(splitMessage[1])
+		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+
+	if(topic=="velViento"){
+		io.sockets.emit('new velViento', {
+			value: String(splitMessage[1])
+		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+
+	if(topic=="dirViento"){
+		io.sockets.emit('new dirViento', {
+			value: String(splitMessage[1])
+		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+
+	if(topic=="mmAgua"){
+		io.sockets.emit('new mmAgua', {
+			value: String(splitMessage[1])
+		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+
+	if(topic=="UV"){
+		io.sockets.emit('new UV', {
+			value: String(splitMessage[1])
+		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+
+	if(topic=="lummens"){
+		io.sockets.emit('new lummens', {
+			value: String(splitMessage[1])
+		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+
+
 	//enviar los datos al dashboard
 	//io.sockets.on('connection', function(socket){
 
@@ -75,9 +141,6 @@ app.get('/chat', function(req, res) {
 	res.sendFile(__dirname + '/views/chat.html');
 });
 app.get('/dashboard',function(req,res){
-	Sensor.find({paramSensor: "temperatura"},function(err,sensor){
-		console.log(sensor[sensor.length-1]);
-	});
 	res.sendFile(__dirname + '/views/dashboard.html');
 });
 
@@ -87,12 +150,13 @@ app.get('/dashboard',function(req,res){
 
 //io.sockets.on('connection', function(socket) {
 //		socket.emit('send temperatura', "34");
-//});
+//});temperatura
 
 // io.connect().emit('send temperatura', "34");
 
-//Sistema de Chat
+//Abre conexion con socket
 io.sockets.on('connection', function(socket) {
+	//Funciones para actualizar los parametros del dashboard
 	socket.on('send temperatura', function(data) {
 		console.log(data);
 		io.sockets.emit('new temperatura', {
@@ -100,6 +164,70 @@ io.sockets.on('connection', function(socket) {
 		});
 	});
 
+	socket.on('send humedad', function(data) {
+		console.log(data);
+		io.sockets.emit('new humedad', {
+			value: data
+		});
+	});
+
+	socket.on('send velocidad', function(data) {
+		console.log(data);
+		io.sockets.emit('new velocidad', {
+			value: data
+		});
+	});
+
+	socket.on('send presion', function(data) {
+		console.log(data);
+		io.sockets.emit('new presion', {
+			value: data
+		});
+	});
+
+	socket.on('send puntoRocio', function(data) {
+		console.log(data);
+		io.sockets.emit('new puntoRocio', {
+			value: data
+		});
+	});
+
+	socket.on('send velViento', function(data) {
+		console.log(data);
+		io.sockets.emit('new velViento', {
+			value: data
+		});
+	});
+
+	socket.on('send dirViento', function(data) {
+		console.log(data);
+		io.sockets.emit('new dirViento', {
+			value: data
+		});
+	});
+
+	socket.on('send mmAgua', function(data) {
+		console.log(data);
+		io.sockets.emit('new mmAgua', {
+			value: data
+		});
+	});
+
+	socket.on('send UV', function(data) {
+		console.log(data);
+		io.sockets.emit('new UV', {
+			value: data
+		});
+	});
+
+	socket.on('send lummens', function(data) {
+		console.log(data);
+		io.sockets.emit('new lummens', {
+			value: data
+		});
+	});
+
+	//Funciones para el sistema de chat
 	socket.on('send message', function(data) {
 		io.sockets.emit('new message', {
 			msg: data,

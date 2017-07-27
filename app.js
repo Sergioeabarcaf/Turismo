@@ -33,6 +33,7 @@ client.on('connect', function() {
 //generar el schema para cargar a la db
 client.on('message', function(topic, message) {
 	splitMessage = message.toString().split("/");
+	//Schema sensores
 	var sensor = new Sensor({
 		paramSensor: String(topic),
 		dato: String(splitMessage[1]),
@@ -45,19 +46,20 @@ client.on('message', function(topic, message) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log("los datos fueron cargados a la db");
+			console.log("los datos fueron cargados a la db " + sensor.paramSensor);
 		}
 	})
 
-	//enviar los datos al dashboard
-
-	io.sockets.on('connection', function(socket){
-			console.log("Esta conectado");
-			io.sockets.emit('new temperatura', {
-				value: String(splitMessage[1])
-			});
-			console.log("Emitio el mensaje a new temperatura");
+	if(topic=="temperatura"){
+		io.sockets.emit('new temperatura', {
+			value: String(splitMessage[1])
 		});
+		console.log("Emitio el mensaje a new temperatura");
+	}
+	//enviar los datos al dashboard
+	//io.sockets.on('connection', function(socket){
+
+		//});
 
 });
 

@@ -41,7 +41,8 @@ $( document ).ready(function() {
     console.log("Entro a new temperatura");
     console.log(data);
      //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     radial.value = parseInt(data.value);
+     radial.value = parseFloat(data.value);
+     console.log(parseFloat(data.value));
   });
 
   //setTimeout(function(){

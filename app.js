@@ -9,10 +9,10 @@ var express = require('express'),
 	document = require("min-document");
 
 //datos de prueba de sensores
-var temp = 65.5;
-var id = "sergio/";
-var messageTemp = id + String(temp);
-var splitMessage = " ";
+//var temp = 65.5;
+//var id = "sergio/";
+//var messageTemp = id + String(temp);
+//var splitMessage = " ";
 
 //subscribe a los topicos de los sensores
 client.on('connect', function() {
@@ -27,10 +27,10 @@ client.on('connect', function() {
 	client.subscribe('UV');
 	client.subscribe('lummens');
 	//Publica de prueba
-	client.publish('temperatura', messageTemp);
+	//client.publish('temperatura', messageTemp);
 });
 
-//Carga de los datos obtenidos a mongoDB
+//generar el schema para cargar a la db
 client.on('message', function(topic, message) {
 	splitMessage = message.toString().split("/");
 	var sensor = new Sensor({
@@ -40,12 +40,7 @@ client.on('message', function(topic, message) {
 		fechaYHora: Date()
 	});
 
-	//console.log("Mostrando informacion");
-	//console.log(String(topic));
-	//console.log(String(splitMessage[1]));
-
-	//
-
+	//Guardar en la db los datos.
 	sensor.save(function(err) {
 		if (err) {
 			console.log(err);
@@ -53,6 +48,17 @@ client.on('message', function(topic, message) {
 			console.log("los datos fueron cargados a la db");
 		}
 	})
+
+	//enviar los datos al dashboard
+
+	io.sockets.on('connection', function(socket){
+			console.log("Esta conectado");
+			io.sockets.emit('new temperatura', {
+				value: String(splitMessage[1])
+			});
+			console.log("Emitio el mensaje a new temperatura");
+		});
+
 });
 
 //Puerto donde corre el sistema

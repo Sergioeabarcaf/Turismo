@@ -39,6 +39,13 @@ client.on('message', function(topic, message) {
 		idTotem: String(splitMessage[0]),
 		fechaYHora: Date()
 	});
+
+	//console.log("Mostrando informacion");
+	//console.log(String(topic));
+	//console.log(String(splitMessage[1]));
+
+	//
+
 	sensor.save(function(err) {
 		if (err) {
 			console.log(err);
@@ -72,8 +79,25 @@ app.get('/dashboard',function(req,res){
 	res.sendFile(__dirname + '/views/dashboard.html');
 });
 
+// io.sockets.emit('send temperatura', "34");
+
+// io.emit('send temperatura', "34");
+
+//io.sockets.on('connection', function(socket) {
+//		socket.emit('send temperatura', "34");
+//});
+
+// io.connect().emit('send temperatura', "34");
+
 //Sistema de Chat
 io.sockets.on('connection', function(socket) {
+	socket.on('send temperatura', function(data) {
+		console.log(data);
+		io.sockets.emit('new temperatura', {
+			value: data
+		});
+	});
+
 	socket.on('send message', function(data) {
 		io.sockets.emit('new message', {
 			msg: data,
@@ -101,4 +125,5 @@ io.sockets.on('connection', function(socket) {
 	function updateNickNames() {
 		io.sockets.emit('usernames', nicknames);
 	}
+
 });

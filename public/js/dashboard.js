@@ -4,8 +4,8 @@ $( document ).ready(function() {
 
   var radial = new RadialGauge({
     renderTo: 'test',
-    width: 400,
-    height: 400,
+    width: 300,
+    height: 300,
     units: 'Km/h',
     title: false,
     value: 0,

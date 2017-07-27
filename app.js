@@ -35,8 +35,8 @@ client.on('message', function(topic, message) {
 	splitMessage = message.toString().split("/");
 	var sensor = new Sensor({
 		paramSensor: String(topic),
-		dato: String(splitMessage[0]),
-		idTotem: String(splitMessage[1]),
+		dato: String(splitMessage[1]),
+		idTotem: String(splitMessage[0]),
 		fechaYHora: Date()
 	});
 
@@ -67,13 +67,7 @@ app.get('/chat', function(req, res) {
 	res.sendFile(__dirname + '/views/chat.html');
 });
 app.get('/dashboard',function(req,res){
-  Sensor.find({paramSensor: "puntoRocio"},function(err,sensor){
-		console.log(sensor[sensor.length-1]);
-	});io.sockets.emit('send temperatura', "34");
 	Sensor.find({paramSensor: "temperatura"},function(err,sensor){
-		console.log(sensor[sensor.length-1]);
-	});
-	Sensor.find({paramSensor: "humedad"},function(err,sensor){
 		console.log(sensor[sensor.length-1]);
 	});
 	res.sendFile(__dirname + '/views/dashboard.html');

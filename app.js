@@ -10,7 +10,7 @@ var express = require('express'),
 
 //datos de prueba de sensores
 var temp = 65.5;
-var id = "sergio ";
+var id = "sergio/";
 var messageTemp = id + String(temp);
 var splitMessage = " ";
 
@@ -35,8 +35,8 @@ client.on('message', function(topic, message) {
 	splitMessage = message.toString().split("/");
 	var sensor = new Sensor({
 		paramSensor: String(topic),
-		dato: String(splitMessage[1]),
-		idTotem: String(splitMessage[0]),
+		dato: String(splitMessage[0]),
+		idTotem: String(splitMessage[1]),
 		fechaYHora: Date()
 	});
 
@@ -69,7 +69,7 @@ app.get('/chat', function(req, res) {
 app.get('/dashboard',function(req,res){
   Sensor.find({paramSensor: "puntoRocio"},function(err,sensor){
 		console.log(sensor[sensor.length-1]);
-	});
+	});io.sockets.emit('send temperatura', "34");
 	Sensor.find({paramSensor: "temperatura"},function(err,sensor){
 		console.log(sensor[sensor.length-1]);
 	});

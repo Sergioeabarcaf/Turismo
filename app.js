@@ -20,11 +20,21 @@ client.on('connect', function() {
 	client.subscribe('humedad');
 	client.subscribe('puntoRocio');
 	client.subscribe('presion');
-	client.subscribe('velViento');
-	client.subscribe('dirViento');
-	client.subscribe('mmAgua');
+	client.subscribe('altitud');
+	client.subscribe('presion_nivelMar');
+	client.subscribe('temperatura_BMP');
+	client.subscribe('lumens');
 	client.subscribe('uv');
-	client.subscribe('lummens');
+	client.subscribe('viend_ins_grado');
+	client.subscribe('viend_chr');
+	client.subscribe('viend_2m_grados');
+	client.subscribe('vel_2m');
+	client.subscribe('raf_ins');
+	client.subscribe('raf_10m');
+	client.subscribe('raf_ins_grados');
+	client.subscribe('raf_10m_grados');
+	client.subscribe('lluvia_1h');
+	client.subscribe('lluvia_24h');
 	//Publica de prueba
 	//client.publish('temperatura', messageTemp);
 });

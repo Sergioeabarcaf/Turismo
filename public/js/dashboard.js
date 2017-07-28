@@ -2,106 +2,31 @@ $( document ).ready(function() {
   var socket = io.connect();
 
 //Dashboard de temperatura
-  var temperatura = new RadialGauge({
+  var temperatura = new LinearGauge({
     renderTo: 'temperatura',
-    width: 300,
+    width: 150,
     height: 300,
     units: "°C",
-    title: "Temperatura",
     minValue: -50,
+    startAngle: 90,
+    ticksAngle: 180,
+    valueBox: false,
     maxValue: 130,
     majorTicks: [
-        -50,
-        -40,
-        -30,
-        -20,
-        -10,
-        0,
-        10,
-        20,
-        30,
-        40,
-        50,
-        60,
-        70,
-        80,
-        90,
-        100,
-        110,
-        120,
-        130,
-    ],
-    minorTicks: 2,
-    strokeTicks: true,
-    highlights: [
-        {
-            "from": -50,
-            "to": 0,
-            "color": "rgba(0,0, 255, .3)"
-        },
-        {
-            "from": 0,
-            "to": 130,
-            "color": "rgba(255, 0, 0, .3)"
-        }
-    ],
-    ticksAngle: 225,
-    startAngle: 67.5,
-    colorMajorTicks: "#ddd",
-    colorMinorTicks: "#ddd",
-    colorTitle: "#eee",
-    colorUnits: "#ccc",
-    colorNumbers: "#eee",
-    colorPlate: "#222",
-    borderShadowWidth: 0,
-    borders: true,
-    needleType: "arrow",
-    needleWidth: 2,
-    needleCircleSize: 7,
-    needleCircleOuter: true,
-    needleCircleInner: false,
-    animationDuration: 1500,
-    animationRule: "linear",
-    colorBorderOuter: "#333",
-    colorBorderOuterEnd: "#111",
-    colorBorderMiddle: "#222",
-    colorBorderMiddleEnd: "#111",
-    colorBorderInner: "#111",
-    colorBorderInnerEnd: "#333",
-    colorNeedleShadowDown: "#333",
-    colorNeedleCircleOuter: "#333",
-    colorNeedleCircleOuterEnd: "#111",
-    colorNeedleCircleInner: "#111",
-    colorNeedleCircleInnerEnd: "#222",
-    valueBoxBorderRadius: 0,
-    colorValueBoxRect: "#222",
-    colorValueBoxRectEnd: "#333"
-  }).draw();
-
-//dashboard de humedad
-  var humedad = new RadialGauge({
-    renderTo: 'humedad',
-    width: 300,
-    height: 300,
-    units: "%",
-    title: "Humedad",
-    minValue: 0,
-    maxValue: 100,
-    majorTicks: [
+        "-50",
+        "-30",
+        "-10",
         "0",
         "10",
-        "20",
         "30",
-        "40",
         "50",
-        "60",
         "70",
-        "80",
         "90",
-        "100"
+        "110",
+        "130"
     ],
-    minorTicks: 2,
-    strokeTicks: true,
+    minorTicks: 1,
+    strokeTicks: false,
     colorPlate: "#fff",
     borderShadowWidth: 0,
     borders: false,
@@ -110,51 +35,230 @@ $( document ).ready(function() {
     needleCircleSize: 7,
     needleCircleOuter: true,
     needleCircleInner: false,
+    colorNeedle: "#fb0000",
+    colorBarProgress: "#fb0000",
     animationDuration: 1500,
-    animationRule: "linear"
+    animationRule: "linear",
+    barWidth: 10,
+    value: 0,
+    valueBox: "true"
   }).draw();
 
-//dashboard de puntoRocio
-  var puntoRocio = new LinearGauge({
-    renderTo: 'puntoRocio',
-    width: 100,
+//dashboard de humedad
+  var humedad = new LinearGauge({
+    renderTo: 'humedad',
+    width: 150,
     height: 300,
-    units: "°C",
-    title: "punto rocio",
-    minValue: -20,
+    units: "%",
+    minValue: 0,
     startAngle: 90,
     ticksAngle: 180,
     valueBox: false,
-    maxValue: 20,
+    maxValue: 100,
     majorTicks: [
-        "-20",
-        "-10",
         "0",
-        "10",
-        "20"
+        "20",
+        "40",
+        "60",
+        "80",
+        "100"
     ],
-    minorTicks: 2,
-    strokeTicks: true,
-    highlights: [
-        {
-            "from": 0,
-            "to": 10,
-            "color": "rgba(200, 50, 50, .75)"
-        }
-    ],
+    minorTicks: 1,
+    strokeTicks: false,
     colorPlate: "#fff",
     borderShadowWidth: 0,
-    borders: true,
+    borders: false,
     needleType: "arrow",
     needleWidth: 2,
     needleCircleSize: 7,
     needleCircleOuter: true,
     needleCircleInner: false,
+    colorNeedle: "rgba(0, 0, 255, 0.6)",
+    colorBarProgress: "rgba(0, 0, 255, 0.6)",
     animationDuration: 1500,
     animationRule: "linear",
     barWidth: 10,
-    value: 0
+    value: 0,
+    valueBox: "true"
   }).draw();
+
+//dashboard de puntoRocio
+  var puntoRocio = new LinearGauge({
+    renderTo: 'puntoRocio',
+    width: 150,
+    height: 300,
+    units: "°C",
+    minValue: -30,
+    startAngle: 90,
+    ticksAngle: 180,
+    valueBox: false,
+    maxValue: 30,
+    majorTicks: [
+        "-30",
+        "-10",
+        "0",
+        "10",
+        "30"
+    ],
+    minorTicks: 1,
+    strokeTicks: false,
+    colorPlate: "#fff",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    colorNeedle: "rgba(0, 255, 0, 0.6)",
+    colorBarProgress: "rgba(0, 255, 0, 0.6)",
+    animationDuration: 1500,
+    animationRule: "linear",
+    barWidth: 10,
+    value: 0,
+    valueBox: "true"
+  }).draw();
+
+//dashboard de UV
+  var uv = new LinearGauge({
+    renderTo: 'uv',
+    width: 150,
+    height: 300,
+    units: "Indice UV",
+    minValue: 0,
+    startAngle: 90,
+    ticksAngle: 180,
+    valueBox: false,
+    maxValue: 12,
+    majorTicks: [
+        "0",
+        "2",
+        "4",
+        "6",
+        "8",
+        "10",
+        "11+"
+    ],
+    highlights: [
+            {
+                "from": 0,
+                "to": 3,
+                "color": "rgba(0, 255, 0, 1)"
+            },
+            {
+                "from": 3,
+                "to": 6,
+                "color": "rgba(255, 255, 1, 1)"
+            },
+            {
+                "from": 6,
+                "to": 8,
+                "color": "rgba(255, 99, 1, 1)"
+            },
+            {
+                "from": 8,
+                "to": 11,
+                "color": "rgba(255, 0, 0, 1)"
+            },
+            {
+                "from":11 ,
+                "to": 12,
+                "color": "rgba(139, 0, 255, 1)"
+            }
+
+    ],
+    minorTicks: 1,
+    strokeTicks: false,
+    colorPlate: "#fff",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    colorNeedle: "rgba(0, 255, 0, 0.6)",
+    animationDuration: 1500,
+    animationRule: "linear",
+    barWidth: 10,
+    value: 0,
+    valueBox: "true"
+  }).draw();
+
+//dashboard de mmAgua
+  var mmAgua = new LinearGauge({
+    renderTo: 'mmAgua',
+    width: 150,
+    height: 300,
+    units: "mm",
+    minValue: -30,
+    startAngle: 90,
+    ticksAngle: 180,
+    valueBox: false,
+    maxValue: 30,
+    majorTicks: [
+        "-30",
+        "-10",
+        "0",
+        "10",
+        "30"
+    ],
+    minorTicks: 1,
+    strokeTicks: false,
+    colorPlate: "#fff",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    colorNeedle: "rgba(0, 255, 0, 0.6)",
+    colorBarProgress: "rgba(0, 255, 0, 0.6)",
+    animationDuration: 1500,
+    animationRule: "linear",
+    barWidth: 10,
+    value: 0,
+    valueBox: "true"
+  }).draw();
+
+//dashboard de lummens
+var lummens = new LinearGauge({
+  renderTo: 'lummens',
+  width: 150,
+  height: 300,
+  units: "lux",
+  minValue: 0,
+  startAngle: 90,
+  ticksAngle: 180,
+  valueBox: false,
+  maxValue: 120000,
+  majorTicks: [
+      "0",
+      "1.000",
+      "10.000",
+      "100.000",
+      "120.000"
+  ],
+  minorTicks: 1,
+  strokeTicks: false,
+  colorPlate: "#fff",
+  borderShadowWidth: 0,
+  borders: false,
+  needleType: "arrow",
+  needleWidth: 2,
+  needleCircleSize: 7,
+  needleCircleOuter: true,
+  needleCircleInner: false,
+  colorNeedle: "rgba(0, 255, 0, 0.6)",
+  colorBarProgress: "rgba(0, 255, 0, 0.6)",
+  animationDuration: 1500,
+  animationRule: "linear",
+  barWidth: 10,
+  value: 0,
+  valueBox: "true",
+  fontNumbersSize: 15
+}).draw();
 
 //dashboard de presion
   var presion = new RadialGauge({
@@ -295,132 +399,6 @@ $( document ).ready(function() {
       borderShadowWidth: 0,
       animationDuration: 1500
   }).draw();
-
-//dashboard de mmAgua
-  var mmAgua = new LinearGauge({
-    renderTo: 'mmAgua',
-    width: 400,
-    height: 150,
-    minValue: 0,
-    maxValue: 100,
-    majorTicks: [
-        "0",
-        "20",
-        "40",
-        "60",
-        "80",
-        "100"
-    ],
-    minorTicks: 10,
-    strokeTicks: true,
-    colorPlate: "#fff",
-    borderShadowWidth: 0,
-    borders: false,
-    barBeginCircle: false,
-    tickSide: "left",
-    numberSide: "left",
-    needleSide: "left",
-    needleType: "line",
-    needleWidth: 3,
-    colorNeedle: "#222",
-    colorNeedleEnd: "#222",
-    animationDuration: 1500,
-    animationRule: "linear",
-    animationTarget: "plate",
-    barWidth: 5,
-    ticksWidth: 50,
-    ticksWidthMinor: 15
-  }).draw();
-
-//dashboard de UV
-  var uv = new LinearGauge({
-    renderTo: 'uv',
-    width: 120,
-    height: 400,
-    units: "°C",
-    minValue: 0,
-    maxValue: 220,
-    majorTicks: [
-        "0",
-        "20",
-        "40",
-        "60",
-        "80",
-        "100",
-        "120",
-        "140",
-        "160",
-        "180",
-        "200",
-        "220"
-    ],
-    minorTicks: 2,
-    strokeTicks: true,
-    highlights: [
-        {
-            "from": 100,
-            "to": 220,
-            "color": "rgba(200, 50, 50, .75)"
-        }
-    ],
-    colorPlate: "#fff",
-    borderShadowWidth: 0,
-    borders: false,
-    needleType: "arrow",
-    needleWidth: 2,
-    animationDuration: 1500,
-    animationRule: "linear",
-    tickSide: "left",
-    numberSide: "left",
-    needleSide: "left",
-    barStrokeWidth: 7,
-    barBeginCircle: false,
-    value: 75
-  }).draw();
-
-//dashboard de lummens
-  var lummens = new RadialGauge({
-    renderTo: 'lummens',
-    width: 300,
-    height: 300,
-    units: "Km/h",
-    minValue: 0,
-    maxValue: 220,
-    majorTicks: [
-        "0",
-        "20",
-        "40",
-        "60",
-        "80",
-        "100",
-        "120",
-        "140",
-        "160",
-        "180",
-        "200",
-        "220"
-    ],
-    minorTicks: 2,
-    strokeTicks: true,
-    highlights: [
-        {
-            "from": 160,
-            "to": 220,
-            "color": "rgba(200, 50, 50, .75)"
-        }
-    ],
-    colorPlate: "#fff",
-    borderShadowWidth: 0,
-    borders: false,
-    needleType: "arrow",
-    needleWidth: 2,
-    needleCircleSize: 7,
-    needleCircleOuter: true,
-    needleCircleInner: false,
-    animationDuration: 1500,
-    animationRule: "linear"
-  }).draw();
-
 
 //Funciones que actualizan los valores del dashboard
   //actualiza valor dashboard temperatura

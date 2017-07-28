@@ -2,77 +2,20 @@ $( document ).ready(function() {
   var socket = io.connect();
 
 //Dashboard de temperatura
-  var temperatura = new LinearGauge({
+  var temperatura = new RadialGauge({
     renderTo: 'temperatura',
     width: 300,
-    height: 100,
+    height: 300,
     units: "°C",
     title: "Temperatura",
     minValue: -50,
-    maxValue: 150,
+    maxValue: 130,
     majorTicks: [
         -50,
+        -40,
         -30,
+        -20,
         -10,
-        0,
-        10,
-        30,
-        50,
-        70,
-        90,
-        110,
-        130,
-        150,
-    ],
-    minorTicks: 5,
-    strokeTicks: true,
-    ticksWidth: 15,
-    ticksWidthMinor: 7.5,
-    highlights: [
-        {
-            "from": -50,
-            "to": 0,
-            "color": "rgba(0,0, 255, .3)"
-        },
-        {
-            "from": 0,
-            "to": 50,
-            "color": "rgba(255, 0, 0, .3)"
-        }
-    ],
-    colorMajorTicks: "#ffe66a",
-    colorMinorTicks: "#ffe66a",
-    colorTitle: "#eee",
-    colorUnits: "#ccc",
-    colorNumbers: "#eee",
-    colorPlate: "#2465c0",
-    colorPlateEnd: "#327ac0",
-    borderShadowWidth: 0,
-    borders: false,
-    borderRadius: 10,
-    needleType: "arrow",
-    needleWidth: 3,
-    animationDuration: 1500,
-    animationRule: "linear",
-    colorNeedle: "#222",
-    colorNeedleEnd: "",
-    colorBarProgress: "#327ac0",
-    colorBar: "#f5f5f5",
-    barStroke: 0,
-    barWidth: 8,
-    barBeginCircle: false
-  }).draw();
-
-//dashboard de humedad
-  var humedad = new LinearGauge({
-    renderTo: 'humedad',
-    width: 300,
-    height: 100,
-    units: "%",
-    title: "Humedad",
-    minValue: 0,
-    maxValue: 100,
-    majorTicks: [
         0,
         10,
         20,
@@ -83,45 +26,92 @@ $( document ).ready(function() {
         70,
         80,
         90,
-        100
+        100,
+        110,
+        120,
+        130,
     ],
-    minorTicks: 5,
+    minorTicks: 2,
     strokeTicks: true,
-    ticksWidth: 15,
-    ticksWidthMinor: 7.5,
     highlights: [
         {
-            "from": 0,
-            "to": 50,
+            "from": -50,
+            "to": 0,
             "color": "rgba(0,0, 255, .3)"
         },
         {
-            "from":50,
-            "to": 100,
+            "from": 0,
+            "to": 130,
             "color": "rgba(255, 0, 0, .3)"
         }
     ],
-    colorMajorTicks: "#ffe66a",
-    colorMinorTicks: "#ffe66a",
+    ticksAngle: 225,
+    startAngle: 67.5,
+    colorMajorTicks: "#ddd",
+    colorMinorTicks: "#ddd",
     colorTitle: "#eee",
     colorUnits: "#ccc",
     colorNumbers: "#eee",
-    colorPlate: "#2465c0",
-    colorPlateEnd: "#327ac0",
+    colorPlate: "#222",
     borderShadowWidth: 0,
-    borders: false,
-    borderRadius: 10,
+    borders: true,
     needleType: "arrow",
-    needleWidth: 3,
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
     animationDuration: 1500,
     animationRule: "linear",
-    colorNeedle: "#222",
-    colorNeedleEnd: "",
-    colorBarProgress: "#327ac0",
-    colorBar: "#f5f5f5",
-    barStroke: 0,
-    barWidth: 8,
-    barBeginCircle: false
+    colorBorderOuter: "#333",
+    colorBorderOuterEnd: "#111",
+    colorBorderMiddle: "#222",
+    colorBorderMiddleEnd: "#111",
+    colorBorderInner: "#111",
+    colorBorderInnerEnd: "#333",
+    colorNeedleShadowDown: "#333",
+    colorNeedleCircleOuter: "#333",
+    colorNeedleCircleOuterEnd: "#111",
+    colorNeedleCircleInner: "#111",
+    colorNeedleCircleInnerEnd: "#222",
+    valueBoxBorderRadius: 0,
+    colorValueBoxRect: "#222",
+    colorValueBoxRectEnd: "#333"
+  }).draw();
+
+//dashboard de humedad
+  var humedad = new RadialGauge({
+    renderTo: 'humedad',
+    width: 300,
+    height: 300,
+    units: "%",
+    title: "Humedad",
+    minValue: 0,
+    maxValue: 100,
+    majorTicks: [
+        "0",
+        "10",
+        "20",
+        "30",
+        "40",
+        "50",
+        "60",
+        "70",
+        "80",
+        "90",
+        "100"
+    ],
+    minorTicks: 2,
+    strokeTicks: true,
+    colorPlate: "#fff",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    animationDuration: 1500,
+    animationRule: "linear"
   }).draw();
 
 //dashboard de puntoRocio
@@ -207,54 +197,59 @@ $( document ).ready(function() {
     needleCircleInner: false,
     animationDuration: 1500,
     animationRule: "linear"
-}).draw();
+  }).draw();
 
 //dashboard de velViento
   var velViento = new RadialGauge({
-    renderTo: 'velViento',
-    width: 300,
-    height: 300,
-    units: "Km/h",
-    minValue: 0,
-    maxValue: 220,
-    majorTicks: [
-        "0",
-        "20",
-        "40",
-        "60",
-        "80",
-        "100",
-        "120",
-        "140",
-        "160",
-        "180",
-        "200",
-        "220"
-    ],
-    minorTicks: 2,
-    strokeTicks: true,
-    highlights: [
-        {
-            "from": 160,
-            "to": 220,
-            "color": "rgba(200, 50, 50, .75)"
-        }
-    ],
-    colorPlate: "#fff",
-    borderShadowWidth: 0,
-    borders: false,
-    needleType: "arrow",
-    needleWidth: 2,
-    needleCircleSize: 7,
-    needleCircleOuter: true,
-    needleCircleInner: false,
-    animationDuration: 1500,
-    animationRule: "linear"
-}).draw();
+      renderTo: 'velViento',
+      width: 300,
+      height: 300,
+      units: "Km/h",
+      minValue: 0,
+      startAngle: 90,
+      ticksAngle: 180,
+      valueBox: false,
+      maxValue: 220,
+      majorTicks: [
+          "0",
+          "20",
+          "40",
+          "60",
+          "80",
+          "100",
+          "120",
+          "140",
+          "160",
+          "180",
+          "200",
+          "220"
+      ],
+      minorTicks: 2,
+      strokeTicks: true,
+      highlights: [
+          {
+              "from": 160,
+              "to": 220,
+              "color": "rgba(200, 50, 50, .75)"
+          }
+      ],
+      colorPlate: "#fff",
+      borderShadowWidth: 0,
+      borders: false,
+      needleType: "arrow",
+      needleWidth: 2,
+      needleCircleSize: 7,
+      needleCircleOuter: true,
+      needleCircleInner: false,
+      animationDuration: 1500,
+      animationRule: "linear"
+  }).draw();
 
 //Dashboard de dirViento
   var dirViento = new RadialGauge({
       renderTo: 'dirViento',
+      width: 300,
+      height: 300,
       minValue: 0,
       maxValue: 360,
       majorTicks: [
@@ -335,7 +330,7 @@ $( document ).ready(function() {
     barWidth: 5,
     ticksWidth: 50,
     ticksWidthMinor: 15
-}).draw();
+  }).draw();
 
 //dashboard de UV
   var uv = new LinearGauge({
@@ -381,7 +376,7 @@ $( document ).ready(function() {
     barStrokeWidth: 7,
     barBeginCircle: false,
     value: 75
-}).draw();
+  }).draw();
 
 //dashboard de lummens
   var lummens = new RadialGauge({
@@ -424,93 +419,63 @@ $( document ).ready(function() {
     needleCircleInner: false,
     animationDuration: 1500,
     animationRule: "linear"
-}).draw();
-
+  }).draw();
 
 
 //Funciones que actualizan los valores del dashboard
   //actualiza valor dashboard temperatura
   socket.on('new temperatura', function(data) {
     console.log("Entro a new temperatura");
-    console.log(data);
-     //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     temperatura.value = parseFloat(data.value);
-     console.log(parseFloat(data.value));
+    temperatura.value = parseFloat(data.value);
+    console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard humedad
   socket.on('new humedad', function(data) {
     console.log("Entro a new humedad");
-    console.log(data);
-     //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     humedad.value = parseFloat(data.value);
-     console.log(parseFloat(data.value));
+    humedad.value = parseFloat(data.value);
+    console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard puntoRocio
   socket.on('new puntoRocio', function(data) {
     console.log("Entro a new puntoRocio");
-    console.log(data);
-     //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     puntoRocio.value = parseFloat(data.value);
-     console.log(parseFloat(data.value));
+    puntoRocio.value = parseFloat(data.value);
+    console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard presion
   socket.on('new presion', function(data) {
     console.log("Entro a new presion");
-    console.log(data);
-     //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     presion.value = parseFloat(data.value);
-     console.log(parseFloat(data.value));
+    presion.value = parseFloat(data.value);
+    console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard velViento
   socket.on('new velViento', function(data) {
     console.log("Entro a new velViento");
-    console.log(data);
-     //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     velViento.value = parseFloat(data.value);
-     console.log(parseFloat(data.value));
+    velViento.value = parseFloat(data.value);
+    console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard dirViento
   socket.on('new dirViento', function(data) {
     console.log("Entro a new dirViento");
-    console.log(data);
-     //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     dirViento.value = parseFloat(data.value);
-     console.log(parseFloat(data.value));
+    dirViento.value = parseFloat(data.value);
+    console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard mmAgua
   socket.on('new mmAgua', function(data) {
     console.log("Entro a new mmAgua");
-    console.log(data);
-     //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     mmAgua.value = parseFloat(data.value);
-     console.log(parseFloat(data.value));
+    mmAgua.value = parseFloat(data.value);
+    console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard UV
-  socket.on('new UV', function(data) {
-    console.log("Entro a new UV");
-    console.log(data);
-     //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     uv.value = parseFloat(data.value);
-     console.log(parseFloat(data.value));
+  socket.on('new uv', function(data) {
+    console.log("Entro a new uv");
+    uv.value = parseFloat(data.value);
+    console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard lummens
   socket.on('new lummens', function(data) {
     console.log("Entro a new lummens");
-    console.log(data);
-     //$chat.append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-     lummens.value = parseFloat(data.value);
-     console.log(parseFloat(data.value));
+    lummens.value = parseFloat(data.value);
+    console.log(parseFloat(data.value));
   });
-
-  //setTimeout(function(){
-  //  socket.emit('send temperatura', "34");
-  //}, 5000);
-
-
-  // for(var indice = 0; indice < temperatureTest.length; indice++){
-  //     console.log(temperatureTest[indice]);
-  //     radial.value = temperatureTest[indice];
-  // }
-
 
 });

@@ -23,7 +23,7 @@ client.on('connect', function() {
 	client.subscribe('velViento');
 	client.subscribe('dirViento');
 	client.subscribe('mmAgua');
-	client.subscribe('UV');
+	client.subscribe('uv');
 	client.subscribe('lummens');
 	//Publica de prueba
 	//client.publish('temperatura', messageTemp);
@@ -99,11 +99,11 @@ client.on('message', function(topic, message) {
 		console.log("Emitio el mensaje a new mmAgua");
 	}
 
-	if(topic=="UV"){
-		io.sockets.emit('new UV', {
+	if(topic=="uv"){
+		io.sockets.emit('new uv', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new UV");
+		console.log("Emitio el mensaje a new uv");
 	}
 
 	if(topic=="lummens"){
@@ -198,9 +198,9 @@ io.sockets.on('connection', function(socket) {
 		});
 	});
 
-	socket.on('send UV', function(data) {
+	socket.on('send uv', function(data) {
 		console.log(data);
-		io.sockets.emit('new UV', {
+		io.sockets.emit('new uv', {
 			value: data
 		});
 	});

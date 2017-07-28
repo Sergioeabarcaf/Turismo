@@ -7,25 +7,22 @@ $( document ).ready(function() {
     width: 150,
     height: 300,
     units: "°C",
-    minValue: -50,
+    minValue: -20,
     startAngle: 90,
     ticksAngle: 180,
     valueBox: false,
-    maxValue: 130,
+    maxValue: 50,
     majorTicks: [
-        "-50",
-        "-30",
+        "-20",
         "-10",
         "0",
         "10",
+        "20",
         "30",
-        "50",
-        "70",
-        "90",
-        "110",
-        "130"
+        "40",
+        "50"
     ],
-    minorTicks: 1,
+    minorTicks: 10,
     strokeTicks: false,
     colorPlate: "#fff",
     borderShadowWidth: 0,
@@ -191,17 +188,18 @@ $( document ).ready(function() {
     width: 150,
     height: 300,
     units: "mm",
-    minValue: -30,
+    minValue: 0,
     startAngle: 90,
     ticksAngle: 180,
     valueBox: false,
-    maxValue: 30,
+    maxValue: 50,
     majorTicks: [
-        "-30",
-        "-10",
         "0",
         "10",
-        "30"
+        "20",
+        "30",
+        "40",
+        "50"
     ],
     minorTicks: 1,
     strokeTicks: false,
@@ -223,71 +221,65 @@ $( document ).ready(function() {
   }).draw();
 
 //dashboard de lummens
-var lummens = new LinearGauge({
-  renderTo: 'lummens',
-  width: 150,
-  height: 300,
-  units: "lux",
-  minValue: 0,
-  startAngle: 90,
-  ticksAngle: 180,
-  valueBox: false,
-  maxValue: 120000,
-  majorTicks: [
-      "0",
-      "1.000",
-      "10.000",
-      "100.000",
-      "120.000"
-  ],
-  minorTicks: 1,
-  strokeTicks: false,
-  colorPlate: "#fff",
-  borderShadowWidth: 0,
-  borders: false,
-  needleType: "arrow",
-  needleWidth: 2,
-  needleCircleSize: 7,
-  needleCircleOuter: true,
-  needleCircleInner: false,
-  colorNeedle: "rgba(0, 255, 0, 0.6)",
-  colorBarProgress: "rgba(0, 255, 0, 0.6)",
-  animationDuration: 1500,
-  animationRule: "linear",
-  barWidth: 10,
-  value: 0,
-  valueBox: "true",
-  fontNumbersSize: 15
-}).draw();
+  var lummens = new LinearGauge({
+    renderTo: 'lummens',
+    width: 150,
+    height: 300,
+    units: "lux",
+    minValue: 0,
+    startAngle: 90,
+    ticksAngle: 180,
+    valueBox: false,
+    maxValue: 120000,
+    majorTicks: [
+        "0",
+        "1.000",
+        "10.000",
+        "100.000",
+        "120.000"
+    ],
+    minorTicks: 1,
+    strokeTicks: false,
+    colorPlate: "#fff",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    colorNeedle: "rgba(0, 255, 0, 0.6)",
+    colorBarProgress: "rgba(0, 255, 0, 0.6)",
+    animationDuration: 1500,
+    animationRule: "linear",
+    barWidth: 10,
+    value: 0,
+    valueBox: "true",
+    fontNumbersSize: 15
+  }).draw();
 
 //dashboard de presion
   var presion = new RadialGauge({
     renderTo: 'presion',
     width: 300,
     height: 300,
-    units: "Km/h",
-    minValue: 0,
-    maxValue: 220,
+    units: "hPa",
+    minValue: 200,
+    maxValue: 1200,
     majorTicks: [
-        "0",
-        "20",
-        "40",
-        "60",
-        "80",
-        "100",
-        "120",
-        "140",
-        "160",
-        "180",
         "200",
-        "220"
+        "400",
+        "600",
+        "800",
+        "1000",
+        "1200"
     ],
     minorTicks: 2,
     strokeTicks: true,
     highlights: [
         {
-            "from": 160,
-            "to": 220,
+            "from": 1000,
+            "to": 1200,
             "color": "rgba(200, 50, 50, .75)"
         }
     ],
@@ -305,48 +297,49 @@ var lummens = new LinearGauge({
 
 //dashboard de velViento
   var velViento = new RadialGauge({
-      renderTo: 'velViento',
-      width: 300,
-      height: 300,
-      units: "Km/h",
-      minValue: 0,
-      startAngle: 90,
-      ticksAngle: 180,
-      valueBox: false,
-      maxValue: 220,
-      majorTicks: [
-          "0",
-          "20",
-          "40",
-          "60",
-          "80",
-          "100",
-          "120",
-          "140",
-          "160",
-          "180",
-          "200",
-          "220"
-      ],
-      minorTicks: 2,
-      strokeTicks: true,
-      highlights: [
-          {
-              "from": 160,
-              "to": 220,
-              "color": "rgba(200, 50, 50, .75)"
-          }
-      ],
-      colorPlate: "#fff",
-      borderShadowWidth: 0,
-      borders: false,
-      needleType: "arrow",
-      needleWidth: 2,
-      needleCircleSize: 7,
-      needleCircleOuter: true,
-      needleCircleInner: false,
-      animationDuration: 1500,
-      animationRule: "linear"
+    renderTo: 'velViento',
+    width: 300,
+    height: 300,
+    units: "Km/Hr",
+    minValue: 0,
+    maxValue: 150,
+    majorTicks: [
+        "0",
+        "10",
+        "20",
+        "30",
+        "40",
+        "50",
+        "60",
+        "70",
+        "80",
+        "90",
+        "100",
+        "110",
+        "120",
+        "130",
+        "140",
+        "150"
+    ],
+    minorTicks: 2,
+    strokeTicks: true,
+    highlights: [
+        {
+            "from": 100,
+            "to": 150,
+            "color": "rgba(200, 50, 50, .75)"
+        }
+    ],
+    colorPlate: "#fff",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    animationDuration: 1500,
+    animationRule: "linear"
   }).draw();
 
 //Dashboard de dirViento
@@ -397,7 +390,8 @@ var lummens = new LinearGauge({
       colorBorderOuterEnd: "#ccc",
       colorNeedleShadowDown: "#222",
       borderShadowWidth: 0,
-      animationDuration: 1500
+      animationDuration: 1500,
+      value: 180
   }).draw();
 
 //Funciones que actualizan los valores del dashboard
@@ -426,20 +420,20 @@ var lummens = new LinearGauge({
     console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard velViento
-  socket.on('new velViento', function(data) {
-    console.log("Entro a new velViento");
+  socket.on('new vel_2m', function(data) {
+    console.log("Entro a new vel_2m");
     velViento.value = parseFloat(data.value);
     console.log(parseFloat(data.value));
   });
   //actualiza valor dashboard dirViento
-  socket.on('new dirViento', function(data) {
-    console.log("Entro a new dirViento");
+  socket.on('new viend_ins_grado', function(data) {
+    console.log("Entro a new viend_ins_grado");
     dirViento.value = parseFloat(data.value);
     console.log(parseFloat(data.value));
   });
-  //actualiza valor dashboard mmAgua
-  socket.on('new mmAgua', function(data) {
-    console.log("Entro a new mmAgua");
+  //actualiza valor dashboard lluvia_1h
+  socket.on('new lluvia_1h', function(data) {
+    console.log("Entro a new lluvia_1h");
     mmAgua.value = parseFloat(data.value);
     console.log(parseFloat(data.value));
   });

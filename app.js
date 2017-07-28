@@ -88,25 +88,25 @@ client.on('message', function(topic, message) {
 		console.log("Emitio el mensaje a new puntoRocio");
 	}
 
-	if(topic=="velViento"){
-		io.sockets.emit('new velViento', {
+	if(topic=="viend_ins_grado"){
+		io.sockets.emit('new viend_ins_grado', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new velViento");
+		console.log("Emitio el mensaje a new viend_ins_grado");
 	}
 
-	if(topic=="dirViento"){
-		io.sockets.emit('new dirViento', {
+	if(topic=="vel_2m"){
+		io.sockets.emit('new vel_2m', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new dirViento");
+		console.log("Emitio el mensaje a new vel_2m");
 	}
 
-	if(topic=="mmAgua"){
-		io.sockets.emit('new mmAgua', {
+	if(topic=="lluvia_1h"){
+		io.sockets.emit('new lluvia_1h', {
 			value: String(splitMessage[1])
 		});
-		console.log("Emitio el mensaje a new mmAgua");
+		console.log("Emitio el mensaje a new lluvia_1h");
 	}
 
 	if(topic=="uv"){
@@ -144,6 +144,7 @@ app.get('/chat', function(req, res) {
 });
 app.get('/dashboard',function(req,res){
 	res.sendFile(__dirname + '/views/dashboard.html');
+
 });
 
 // io.sockets.emit('send temperatura', "34");
@@ -187,23 +188,23 @@ io.sockets.on('connection', function(socket) {
 		});
 	});
 
-	socket.on('send velViento', function(data) {
+	socket.on('send viend_ins_grado', function(data) {
 		console.log(data);
-		io.sockets.emit('new velViento', {
+		io.sockets.emit('new viend_ins_grado', {
 			value: data
 		});
 	});
 
-	socket.on('send dirViento', function(data) {
+	socket.on('send vel_2m', function(data) {
 		console.log(data);
-		io.sockets.emit('new dirViento', {
+		io.sockets.emit('new vel_2m', {
 			value: data
 		});
 	});
 
-	socket.on('send mmAgua', function(data) {
+	socket.on('send lluvia_1h', function(data) {
 		console.log(data);
-		io.sockets.emit('new mmAgua', {
+		io.sockets.emit('new lluvia_1h', {
 			value: data
 		});
 	});

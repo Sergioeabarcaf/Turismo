@@ -6,8 +6,12 @@ var express = require('express'),
 	mqtt = require('mqtt'),
 	client = mqtt.connect('mqtt://localhost:1883'),
 	Sensor = require("./models/sensor").Sensor,
+<<<<<<< HEAD
+	RadialGauge = require("canvas-gauges");
+=======
 	document = require("min-document");
 
+>>>>>>> dev_sergioeabarcaf
 //datos de prueba de sensores
 //var temp = 65.5;
 //var id = "sergio/";

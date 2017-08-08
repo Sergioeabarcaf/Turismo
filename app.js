@@ -117,7 +117,7 @@ client.on('message', function(topic, message) {
 });
 
 //Puerto donde corre el sistema
-server.listen(80);
+server.listen(8080);
 
 //Ruteo a las paginas
 app.use(express.static(__dirname + '/public'));
@@ -129,6 +129,10 @@ app.get('/chat', function(req, res) {
 });
 app.get('/dashboard',function(req,res){
 	res.sendFile(__dirname + '/views/dashboard.html');
+});
+//Redireccionamiento a otra IP
+app.get('/test',function(req,res){
+	res.redirect('http://146.83.190.220');
 });
 
 //Abre conexion con socket

@@ -8,12 +8,6 @@ var express = require('express'),
 	Sensor = require("./models/sensor").Sensor,
 	document = require("min-document");
 
-//datos de prueba de sensores
-//var temp = 65.5;
-//var id = "sergio/";
-//var messageTemp = id + String(temp);
-//var splitMessage = " ";
-
 //subscribe a los topicos de los sensores
 client.on('connect', function() {
 	client.subscribe('temperatura');
@@ -35,8 +29,6 @@ client.on('connect', function() {
 	client.subscribe('raf_10m_grados');
 	client.subscribe('lluvia_1h');
 	client.subscribe('lluvia_24h');
-	//Publica de prueba
-	//client.publish('temperatura', messageTemp);
 });
 
 //generar el schema para cargar a la db
@@ -122,13 +114,6 @@ client.on('message', function(topic, message) {
 		});
 		console.log("Emitio el mensaje a new lummens");
 	}
-
-
-	//enviar los datos al dashboard
-	//io.sockets.on('connection', function(socket){
-
-		//});
-
 });
 
 //Puerto donde corre el sistema
@@ -145,16 +130,6 @@ app.get('/chat', function(req, res) {
 app.get('/dashboard',function(req,res){
 	res.sendFile(__dirname + '/views/dashboard.html');
 });
-
-// io.sockets.emit('send temperatura', "34");
-
-// io.emit('send temperatura', "34");
-
-//io.sockets.on('connection', function(socket) {
-//		socket.emit('send temperatura', "34");
-//});temperatura
-
-// io.connect().emit('send temperatura', "34");
 
 //Abre conexion con socket
 io.sockets.on('connection', function(socket) {
